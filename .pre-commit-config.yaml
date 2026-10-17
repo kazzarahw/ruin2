@@ -1,0 +1,40 @@
+# Runs with `prek` (https://prek.j178.dev) or classic `pre-commit`.
+# Install the git shims once with `make hooks`.
+# `make check` is the authoritative gate and also runs the hygiene hooks below.
+# These hooks check only -- never fix -- so a commit can never contain code
+# that has not passed `make check`. `make fix` is the fixing path.
+default_stages: [pre-commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.1
+    hooks:
+      - id: ruff-check
+      - id: ruff-format
+        args: [--check]
+
+  - repo: local
+    hooks:
+      - id: ty
+        name: ty type check
+        entry: uv run ty check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: import-linter
+        name: import-linter architecture check
+        entry: uv run lint-imports
+        language: system
+        pass_filenames: false
+        always_run: true
