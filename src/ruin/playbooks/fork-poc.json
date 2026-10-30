@@ -1,0 +1,18 @@
+{
+  "name": "fork-poc",
+  "schema": 2,
+  "description": "Build recon, run forge test on fork, measure drain.",
+  "params": [
+    "recon_file",
+    "name",
+    "forge_test",
+    "method",
+    "rpc"
+  ],
+  "steps": [
+    {
+      "operation": "pipeline",
+      "params": {}
+    }
+  ]
+}

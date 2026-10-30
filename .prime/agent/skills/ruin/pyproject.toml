@@ -1,0 +1,255 @@
+[project]
+name = "ruin"
+version = "0.1.0"
+description = "Fork-first DeFi security-research pipeline packaged as a Prime Agent skill."
+readme = "README.md"
+authors = [
+    { name = "kazzarah", email = "155109680+kazzarahw@users.noreply.github.com" }
+]
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[project.scripts]
+"ruin" = "ruin.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ruin"]
+
+[dependency-groups]
+dev = [
+    "actionlint-py>=1.7.12.25",
+    "deptry>=0.25.1",
+    "hypothesis>=6.170.0",
+    "import-linter>=2.15",
+    "mutmut>=3.8.0",
+    "pip-audit>=2.10.1",
+    "prek>=0.5.5",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "pytest-timeout>=2.4.0",
+    "ruff>=0.17.1",
+    "ty>=0.0.88",
+]
+
+[tool.uv]
+required-version = ">=0.13"
+
+# ---------------------------------------------------------------------------
+# ruff: formatting + linting.
+# Fix with `make fix`; verify with `make check`.
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py311"
+extend-exclude = ["tests/fixtures", ".prime"]
+# Concise output keeps feedback loops cheap for agents (no source snippets).
+output-format = "concise"
+
+[tool.ruff.lint]
+# A deliberately curated rule set: everything here is actionable and maps to a
+# clear fix. Do not remove rules to make a failure go away; fix the code.
+select = [
+    "A",     # shadowed builtins
+    "ANN",   # require type annotations
+    "ARG",   # unused function arguments
+    "B",     # bugbear: likely bugs
+    "C4",    # comprehension simplifications
+    "C90",   # cyclomatic complexity (mccabe)
+    "D",     # pydocstyle: every module, class, and public function is documented
+    "DTZ",   # naive datetimes
+    "E",     # pycodestyle errors
+    "ERA",   # commented-out code
+    "F",     # pyflakes: undefined names, unused imports
+    "FLY",   # prefer f-strings
+    "FURB",  # refurb: modern, clearer idioms
+    "I",     # import sorting
+    "LOG",   # logging misuse
+    "N",     # naming conventions
+    "PIE",   # misc lints
+    "PL",    # pylint subset (see [tool.ruff.lint.pylint] limits)
+    "PT",    # pytest style
+    "PTH",   # use pathlib over os.path
+    "RET",   # cleaner returns
+    "RUF",   # ruff-specific (includes RUF100: unused noqa)
+    "S",     # bandit: security basics
+    "SIM",   # simplifiable code
+    "T10",   # leftover debugger statements
+    "T20",   # print statements (allowed only in cli.py)
+    "TC",    # type-checking-only imports
+    "TID",   # import conventions
+    "TRY",   # exception handling
+    "UP",    # pyupgrade: modern syntax
+    "W",     # pycodestyle warnings
+]
+ignore = [
+    "TRY003", # raising ValueError with a long message is fine in this template
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+# Hard ceilings keep every function small enough for a small model to reason
+# about in one pass. Split the function instead of raising these values.
+max-args = 5
+max-branches = 10
+max-returns = 5
+max-statements = 40
+
+[tool.ruff.lint.pydocstyle]
+# Google-style sections (Args:, Returns:, Raises:), as in docs/conventions.md.
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "ANN401",  # Any is standard in test mocks
+    "ARG001",  # unused args in mock functions are fine
+    "B011",    # assert False is a test idiom
+    "D",       # test names state the behavior; extra docstrings are noise
+    "PLC0415", # mid-function imports are fine in tests
+    "PLR2004", # magic values are expected in tests
+    "PT015",   # assert False is valid for should-raise patterns
+    "PT017",   # assert on exception is valid in context managers
+    "S101",    # assert is the test API
+    "S106",    # hardcoded passwords in test args are fixtures
+    "S110",    # try-except-pass is valid in test cleanup
+    "SIM105",  # contextlib.suppress is optional in tests
+]
+"src/*/cli.py" = [
+    "T20",     # the CLI layer is the only place in the package that may print()
+]
+"src/ruin/services/*.py" = [
+    "PLC0415", # mid-function imports break circular dependencies
+    "S603",    # services wrap fixed-argument subprocess calls
+    "S607",    # executables are resolved from PATH at runtime
+]
+"tests/integration/*.py" = [
+    "S603",    # integration tests invoke installed tools
+    "S607",    # executables are resolved from PATH at runtime
+]
+"tests/core/test_golden.py" = [
+    "E501",    # golden expected Markdown lines may exceed 88 chars
+]
+"tests/core/test_golden_all.py" = [
+    "E501",    # golden expected Markdown lines may exceed 88 chars
+    "W291",    # golden expected lines may have trailing spaces
+]
+"src/ruin/core/research.py" = ["E501"]
+"src/ruin/core/rng.py" = ["E501"]
+"src/ruin/core/fuzz.py" = ["E501"]
+"src/ruin/core/trust.py" = ["E501"]
+"src/ruin/core/screen.py" = ["E501"]
+"src/ruin/core/pipeline.py" = ["E501"]
+"src/ruin/core/triage.py" = ["E501"]
+"src/ruin/core/exploits.py" = ["E501"]
+"scripts/**" = [
+    "S607",    # scripts may invoke tools from PATH (e.g. `uv`) with fixed args
+    "T20",     # developer scripts report progress on stdout
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# ---------------------------------------------------------------------------
+# ty: type checking.
+# Configuration approximates a strict mode (see ty's "coming from mypy or
+# pyright" guide). Fix reported problems; do not suppress them.
+# ---------------------------------------------------------------------------
+[tool.ty.src]
+exclude = ["tests/fixtures", ".prime"]
+
+[tool.ty.rules]
+# The four rules below approximate the `--strict` mode of other checkers; the
+# rest goes beyond it (see ty's "coming from mypy or pyright" guide).
+division-by-zero = "warn"
+dynamic-function-decorator-return = "error"
+missing-type-argument = "error"
+possibly-missing-attribute = "warn"
+possibly-missing-import = "warn"
+possibly-unresolved-reference = "warn"
+unsound-return-statement = "error"
+
+[tool.ty.analysis]
+# `# type: ignore` must not be able to silence ty: suppressions are banned
+# outright (AGENTS.md rule 1), so make them ineffective too.
+respect-type-ignore-comments = false
+strict-equality-semantics = true
+strict-generic-narrowing = true
+
+# ---------------------------------------------------------------------------
+# pytest: tests + coverage gate.
+# `make test` enforces coverage; during iteration run a single test file with
+# `uv run pytest tests/test_x.py -q`.
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "9.0"
+addopts = "-q --tb=short -ra --strict-markers --strict-config"
+testpaths = ["tests"]
+markers = ["integration: opt-in tests requiring external tools or network"]
+# Warnings are bugs-in-waiting: make them fail the suite.
+filterwarnings = ["error"]
+xfail_strict = true
+# A hung test should fail fast instead of stalling an agent loop.
+timeout = 60
+
+[tool.coverage.run]
+source = ["src"]
+omit = [".prime/*"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = true
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+]
+
+# ---------------------------------------------------------------------------
+# import-linter: architecture enforcement.
+# Higher layers may import lower layers; never the reverse.
+# ---------------------------------------------------------------------------
+[tool.importlinter]
+root_packages = ["ruin"]
+
+[[tool.importlinter.contracts]]
+name = "Layered architecture: cli -> api -> services -> core"
+type = "layers"
+layers = [
+    "ruin.cli",
+    "ruin.api",
+    "ruin.services",
+    "ruin.core",
+]
+
+# ---------------------------------------------------------------------------
+# deptry: dependency hygiene for runtime dependencies. Development tools are
+# run via `uv run`, never imported, and are outside deptry's default scan.
+# ---------------------------------------------------------------------------
+[tool.deptry]
+# The package's own imports; deptry cannot always detect them automatically.
+known_first_party = ["ruin"]
+
+# ---------------------------------------------------------------------------
+# mutmut: mutation testing (scheduled CI job, see .github/workflows/mutation.yml)
+# ---------------------------------------------------------------------------
+[tool.mutmut]
+# The whole package is copied (so imports work), but cli.py is not mutated:
+# argparse wiring produces noisy survivors, and its logic is thin by design.
+# Every surviving mutant elsewhere is a real gap worth a test.
+source_paths = ["src/ruin"]
+do_not_mutate = [
+    "src/ruin/cli.py",
+    "src/ruin/services/parsing.py",
+    "src/ruin/services/subprocesses.py",
+]
+pytest_add_cli_args_test_selection = ["tests"]
+pytest_add_cli_args = ["-q"]

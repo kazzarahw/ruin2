@@ -1,0 +1,329 @@
+{
+ "accessmap": {
+  "source": "s.sol"
+ },
+ "analyze": {
+  "name": "target",
+  "source": "s.sol"
+ },
+ "bundle": {
+  "name": "N",
+  "pipeline": false,
+  "screen": false
+ },
+ "cluster": {
+  "addresses": [
+   "0x1"
+  ],
+  "chain": "EVM",
+  "out": null,
+  "rpc": "R"
+ },
+ "cosmos-gov": {
+  "chain": "neutron",
+  "lcd": null
+ },
+ "ctoken-inflation": {
+  "chain": "ethereum",
+  "ctoken": "0x1",
+  "out": null,
+  "rpc": null
+ },
+ "decompile": {
+  "address": "0x1",
+  "chain": "ethereum",
+  "out": null,
+  "rpc": null
+ },
+ "enumerate": {
+  "address": "0x1",
+  "chain": "ethereum",
+  "rpc": null
+ },
+ "finding-dedupe": {
+  "file": "f"
+ },
+ "finding-list": {
+  "file": "f"
+ },
+ "finding-merge": {
+  "file": "f",
+  "other": "g"
+ },
+ "finding-new": {
+  "confidence": 0,
+  "contract": "",
+  "evidence": [],
+  "file": "f",
+  "id": "id",
+  "severity": "",
+  "title": [
+   "title"
+  ]
+ },
+ "finding-update": {
+  "evidence": [],
+  "file": "f",
+  "id": "id",
+  "state": "state"
+ },
+ "flashloan": {
+  "amount": "10000 ether",
+  "asset": null,
+  "chain": null,
+  "out": null,
+  "pool": null,
+  "rpc": "R",
+  "target": "0x1"
+ },
+ "fuzz": {
+  "detail": "",
+  "finding": null,
+  "kind": "invariant",
+  "linked_finding": null,
+  "match_test": null,
+  "outcome": "passed",
+  "run": false,
+  "target": "t",
+  "tool": "foundry",
+  "tool_command": null
+ },
+ "honeypot": {
+  "mint": "M",
+  "out": null,
+  "rpc": ""
+ },
+ "honeypot-evm": {
+  "chain": "ethereum",
+  "out": null,
+  "rpc": null,
+  "token": "0x1"
+ },
+ "hunt": {
+  "also": [],
+  "blocks": 1500,
+  "chain": "ethereum",
+  "from_block": null,
+  "limit": 40,
+  "min_usd": 2000.0,
+  "out": null,
+  "rpc": null,
+  "to_block": 0,
+  "token": "0x1"
+ },
+ "impl-diff": {
+  "chain": "ethereum",
+  "new_impl": "0x1",
+  "old_impl": "0x2",
+  "old_rpc": "",
+  "out": null,
+  "rpc": null
+ },
+ "infra": {
+  "name": "N",
+  "out": null
+ },
+ "inspect": {
+  "address": "0x1",
+  "chain": "EVM",
+  "chain_id": 1,
+  "out": null,
+  "rpc": "",
+  "source": false
+ },
+ "invariants": {
+  "address": "0x1",
+  "chain": "ethereum",
+  "rpc": null,
+  "scaffold": null
+ },
+ "logs": {
+  "address": "0x1",
+  "chain": "EVM",
+  "from_block": 1,
+  "rpc": "https://ethereum-rpc.publicnode.com",
+  "to_block": 2
+ },
+ "map": {
+  "asset": "0x1",
+  "out": null,
+  "slug": "slug"
+ },
+ "mintsig": {
+  "address": "M",
+  "chain": "ethereum",
+  "rpc": null
+ },
+ "model": {
+  "address": "0x1",
+  "chain": "ethereum",
+  "rpc": null
+ },
+ "oracle": {
+  "chain": null,
+  "min_deviation": "1 ether",
+  "oracle": null,
+  "out": null,
+  "reserve_a": null,
+  "reserve_b": null,
+  "router": null,
+  "rpc": "R",
+  "swap_amount": "1000000 ether",
+  "target": "0x1"
+ },
+ "pipeline": {
+  "forge_test": "T",
+  "fork_block": null,
+  "method": "M",
+  "min_tvl": null,
+  "mode": "research",
+  "name": "N",
+  "out": null,
+  "private_key": null,
+  "recon_file": "x.json",
+  "rpc": "R",
+  "vulns": null
+ },
+ "pipeline-status": {
+  "name": "N",
+  "stage": []
+ },
+ "playbook": {
+  "name": "name",
+  "out": null,
+  "param": []
+ },
+ "probe": {
+  "address": "0x1",
+  "chain": "ethereum",
+  "extra_selectors": [],
+  "out": null,
+  "probe_from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  "rpc": null
+ },
+ "proxy": {
+  "address": "0x1",
+  "rpc": "https://ethereum-rpc.publicnode.com"
+ },
+ "rank": {
+  "chain": [],
+  "exclude_chain": [],
+  "limit": 10,
+  "screen": null
+ },
+ "replay": {
+  "address": "0x1",
+  "chain": "EVM",
+  "from_block": 1,
+  "out": null,
+  "rpc": "R",
+  "to_block": 2,
+  "tx": "0xtx"
+ },
+ "research": {
+  "mechanism": "mech",
+  "source": [],
+  "summary": [
+   "sum"
+  ]
+ },
+ "resolve": {
+  "address": "0x1",
+  "chain": "ethereum",
+  "rpc": null
+ },
+ "review": {
+  "out": null,
+  "source": "s.sol"
+ },
+ "rng-hack": {
+  "decision": null,
+  "manipulator": null,
+  "mechanism": "mech",
+  "source": [
+   "v"
+  ],
+  "summary": [
+   "sum"
+  ]
+ },
+ "screen": {
+  "bespoke": false,
+  "chain": "ethereum",
+  "custodial": false,
+  "listed": null,
+  "name": "N",
+  "source": "none",
+  "tvl": "0"
+ },
+ "selectors": {
+  "chain": "ethereum",
+  "out": null,
+  "resolve": false,
+  "rpc": null,
+  "target": "0x1"
+ },
+ "slither": {
+  "out": null,
+  "source": "s.sol"
+ },
+ "slot-hunt": {
+  "account": null,
+  "chain": "ethereum",
+  "out": null,
+  "rpc": null,
+  "token": "0x1"
+ },
+ "solvency": {
+  "out": null,
+  "rpc": "https://ethereum-rpc.publicnode.com",
+  "underlying": "",
+  "vault": "0x1"
+ },
+ "source": {
+  "address": "0x1",
+  "chain": "EVM",
+  "chain_id": 1,
+  "out": null,
+  "tree": null
+ },
+ "symbolic": {
+  "detail": "",
+  "finding": null,
+  "linked_finding": null,
+  "outcome": null,
+  "run": false,
+  "target": "t",
+  "tool": "halmos",
+  "tool_command": null
+ },
+ "thin-collateral": {
+  "blocks": 3000,
+  "chain": "ethereum",
+  "factory": "0x3",
+  "market": "0x2",
+  "min_usd": 50000.0,
+  "out": null,
+  "price_usd": 1.0,
+  "rpc": null,
+  "token": "0x1"
+ },
+ "trace": {
+  "rpc": "https://ethereum-rpc.publicnode.com",
+  "tx": "0xtx"
+ },
+ "triage": {
+  "check": [],
+  "file": null,
+  "mode": "checks",
+  "name": "N",
+  "out": null,
+  "signal": [],
+  "source": null
+ },
+ "trust": {
+  "assume": [],
+  "custodial": false,
+  "name": "N"
+ }
+}

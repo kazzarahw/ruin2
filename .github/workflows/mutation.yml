@@ -1,0 +1,48 @@
+name: Mutation testing
+
+# Mutation testing checks that the test suite actually *catches* bugs, not
+# just that it runs. It is slow, so it runs weekly and on demand -- not on
+# every pull request. Survivors are printed for review; see docs/testing.md.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  mutation:
+    name: mutation
+    runs-on: ubuntu-latest
+    # Mutation testing re-runs the suite per mutant; real projects need room.
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run mutmut run
+      # mutmut exits 0 regardless of survivors; the report is the point.
+      - name: Report surviving mutants and totals
+        run: |
+          uv run mutmut results
+          uv run mutmut export-cicd-stats
+          cat mutants/mutmut-cicd-stats.json
+      # Survivor counts on the run page, so nobody has to dig through logs.
+      - name: Add the result summary to the workflow run page
+        if: always()
+        run: |
+          if [ -f mutants/mutmut-cicd-stats.json ]; then
+            {
+              echo '## Mutation testing'
+              echo '```json'
+              cat mutants/mutmut-cicd-stats.json
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi

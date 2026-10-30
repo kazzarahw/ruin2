@@ -1,0 +1,297 @@
+{
+ "accessmap": [
+  "source",
+  "accessmap",
+  "s.sol"
+ ],
+ "analyze": [
+  "source",
+  "analyze",
+  "s.sol"
+ ],
+ "bundle": [
+  "target",
+  "bundle",
+  "N"
+ ],
+ "cluster": [
+  "bytecode",
+  "cluster",
+  "0x1",
+  "--rpc",
+  "R"
+ ],
+ "cosmos-gov": [
+  "classes",
+  "cosmos-gov"
+ ],
+ "ctoken-inflation": [
+  "classes",
+  "ctoken",
+  "0x1"
+ ],
+ "decompile": [
+  "bytecode",
+  "decompile",
+  "0x1"
+ ],
+ "enumerate": [
+  "protocol",
+  "enumerate",
+  "0x1"
+ ],
+ "finding-dedupe": [
+  "finding",
+  "dedupe",
+  "--file",
+  "f"
+ ],
+ "finding-list": [
+  "finding",
+  "list",
+  "--file",
+  "f"
+ ],
+ "finding-merge": [
+  "finding",
+  "merge",
+  "--file",
+  "f",
+  "--other",
+  "g"
+ ],
+ "finding-new": [
+  "finding",
+  "new",
+  "id",
+  "title",
+  "--file",
+  "f"
+ ],
+ "finding-update": [
+  "finding",
+  "update",
+  "id",
+  "state",
+  "--file",
+  "f"
+ ],
+ "flashloan": [
+  "verify",
+  "flashloan",
+  "0x1",
+  "--rpc",
+  "R"
+ ],
+ "fuzz": [
+  "verify",
+  "fuzz",
+  "t"
+ ],
+ "honeypot": [
+  "classes",
+  "honeypot",
+  "M"
+ ],
+ "honeypot-evm": [
+  "classes",
+  "honeypot-evm",
+  "0x1"
+ ],
+ "hunt": [
+  "target",
+  "hunt",
+  "0x1"
+ ],
+ "impl-diff": [
+  "bytecode",
+  "impl-diff",
+  "0x1",
+  "0x2"
+ ],
+ "infra": [
+  "source",
+  "infra",
+  "N"
+ ],
+ "inspect": [
+  "bytecode",
+  "inspect",
+  "0x1"
+ ],
+ "invariants": [
+  "protocol",
+  "invariants",
+  "0x1"
+ ],
+ "logs": [
+  "chain",
+  "logs",
+  "0x1",
+  "--from-block",
+  "1",
+  "--to-block",
+  "2"
+ ],
+ "map": [
+  "target",
+  "map",
+  "slug",
+  "--asset",
+  "0x1"
+ ],
+ "mintsig": [
+  "classes",
+  "mintsig",
+  "M"
+ ],
+ "model": [
+  "protocol",
+  "model",
+  "0x1"
+ ],
+ "oracle": [
+  "verify",
+  "oracle",
+  "0x1",
+  "--rpc",
+  "R"
+ ],
+ "pipeline": [
+  "verify",
+  "poc",
+  "x.json",
+  "--name",
+  "N",
+  "--forge-test",
+  "T",
+  "--method",
+  "M",
+  "--rpc",
+  "R"
+ ],
+ "pipeline-status": [
+  "flow",
+  "status",
+  "N"
+ ],
+ "playbook": [
+  "flow",
+  "playbook",
+  "name"
+ ],
+ "probe": [
+  "bytecode",
+  "probe",
+  "0x1"
+ ],
+ "proxy": [
+  "bytecode",
+  "proxy",
+  "0x1"
+ ],
+ "rank": [
+  "target",
+  "rank"
+ ],
+ "replay": [
+  "chain",
+  "replay",
+  "0xtx",
+  "--address",
+  "0x1",
+  "--rpc",
+  "R",
+  "--from-block",
+  "1",
+  "--to-block",
+  "2"
+ ],
+ "research": [
+  "source",
+  "research",
+  "mech",
+  "sum"
+ ],
+ "resolve": [
+  "protocol",
+  "resolve",
+  "0x1"
+ ],
+ "review": [
+  "source",
+  "review",
+  "s.sol"
+ ],
+ "rng-hack": [
+  "classes",
+  "rng",
+  "mech",
+  "sum",
+  "--source",
+  "v"
+ ],
+ "screen": [
+  "target",
+  "screen",
+  "N",
+  "--chain",
+  "ethereum"
+ ],
+ "selectors": [
+  "bytecode",
+  "selectors",
+  "0x1"
+ ],
+ "slither": [
+  "source",
+  "slither",
+  "s.sol"
+ ],
+ "slot-hunt": [
+  "bytecode",
+  "slot-hunt",
+  "0x1"
+ ],
+ "solvency": [
+  "classes",
+  "erc4626",
+  "0x1"
+ ],
+ "source": [
+  "source",
+  "fetch",
+  "0x1"
+ ],
+ "symbolic": [
+  "verify",
+  "symbolic",
+  "t"
+ ],
+ "thin-collateral": [
+  "classes",
+  "thin-collateral",
+  "0x1",
+  "--market",
+  "0x2",
+  "--factory",
+  "0x3",
+  "--price-usd",
+  "1"
+ ],
+ "trace": [
+  "chain",
+  "trace",
+  "0xtx"
+ ],
+ "triage": [
+  "source",
+  "triage",
+  "N"
+ ],
+ "trust": [
+  "target",
+  "trust",
+  "N"
+ ]
+}

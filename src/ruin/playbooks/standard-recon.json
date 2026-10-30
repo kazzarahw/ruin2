@@ -1,0 +1,44 @@
+{
+  "name": "standard-recon",
+  "schema": 2,
+  "description": "Screen, rank, map, SAST, triage a DeFi target.",
+  "params": [
+    "slug",
+    "asset",
+    "chain",
+    "address"
+  ],
+  "steps": [
+    {
+      "operation": "rank",
+      "params": {
+        "limit": "20"
+      }
+    },
+    {
+      "operation": "map",
+      "params": {}
+    },
+    {
+      "operation": "source",
+      "params": {
+        "address": "{address}",
+        "tree": "src-{address}"
+      }
+    },
+    {
+      "operation": "slither",
+      "params": {
+        "source": "{last_file}",
+        "out": "slither-{address}.json"
+      }
+    },
+    {
+      "operation": "triage",
+      "params": {
+        "name": "{slug}",
+        "file": "{last_file}"
+      }
+    }
+  ]
+}

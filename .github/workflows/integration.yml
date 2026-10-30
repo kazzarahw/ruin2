@@ -1,0 +1,23 @@
+name: integration
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.3.0
+      - name: Install Foundry
+        run: |
+          curl -L https://foundry.paradigm.xyz | bash
+          foundryup
+      - name: Install Slither
+        run: pipx install slither-analyzer
+      - name: Run integration tests
+        env:
+          RUIN_INTEGRATION: "1"
+        run: uv run pytest -m integration -q

@@ -1,0 +1,39 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments and secrets
+.venv/
+venv/
+.env
+.envrc
+
+# Packaging and builds
+build/
+dist/
+*.egg-info/
+
+# Tool caches and reports
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+.import_linter_cache/
+.coverage
+.coverage.*
+htmlcov/
+mutants/
+.mutmut-cache
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+tests/fixtures/foundry/lib/
+tests/fixtures/foundry/out/
+tests/fixtures/foundry/cache/
+tests/fixtures/foundry/broadcast/
+tests/fixtures/foundry/.constructor-args.txt
+
+# Prime skill environment artifacts (not part of the synced manifest)
+.prime/agent/skills/ruin/uv.lock
+.prime/agent/skills/ruin/src.snapshot.bak/
